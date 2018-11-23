@@ -1,6 +1,7 @@
 @import 'reset';
 
 #wrap{
+  position: relative;
   height: 100%;
   #header{
     position: relative;
@@ -48,6 +49,7 @@
         position: absolute;
         left: 50%;
         bottom: -11px;
+        z-index: 5;
         width: 21px;
         height: 11px;
         background-image: url('../images/arrow.png');
@@ -57,9 +59,48 @@
     }
   }
   #content{
-    width: 100%;
-    height: 100%;
-    background: hotpink;
+    position: absolute;
+    top: 80px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: pink;
+    overflow: hidden;
+    >ul{
+      position: absolute;
+      //解决第一次没有过渡效果问题
+      top: 0;
+      width: 100%;
+      height: 500%;
+      transition: top 1s;
+      >li{
+        position: relative;
+        width: 100%;
+        height: 20%;
+        /*display: flex;
+        justify-content: center;
+        align-items: center;*/
+        >section{
+          /*position: absolute;
+          top: 50%;
+          left: 50%;
+          margin: -260px 0 0 -550px;*/
+          /*position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 0;
+          margin: auto;*/
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 1100px;
+          height: 520px;
+          background: deeppink;
+        }
+      }
+    }
   }
 }
 /*

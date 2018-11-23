@@ -87,7 +87,8 @@ module.exports = {
               //如果你想在 jshint 出现错误时，立刻停止编译
               //请设置 failOnHint 参数为true
               failOnHint: true,
-              esversion: 6
+              esversion: 6,
+              loopfunc: true
               // 自定义报告函数
               // reporter: function(errors) { }
             }

@@ -1,5 +1,5 @@
 /*
-头部模块
+头部、内容区模块
  */
 export default function () {
   //实现头部点击切换class
@@ -7,7 +7,6 @@ export default function () {
   const arrowNode = document.querySelector('.arrow');
   const ulNode = document.querySelector('#content>ul');
   const contentNode = document.querySelector('#content');
-  
 
   //所有样式选择器都是从右往左的解析的
   //选择器最多3-4个
@@ -15,7 +14,7 @@ export default function () {
   // const navLiNodes = document.querySelectorAll('#wrap #header .header-main .nav li');
   
   //缓存高度
-  const contentHeight = contentNode.offsetHeight;
+  let contentHeight = contentNode.offsetHeight;
   //缓存小箭头一半的宽度
   const arrowHalfWidth = arrowNode.offsetWidth / 2;
   
@@ -27,42 +26,49 @@ export default function () {
   //firefox
   document.addEventListener && document.addEventListener('DOMMouseScroll', wheel);
   
+  let wheelTimer = null;
+  
   function wheel(event) {
     event = event || window.event;
     
-    let flag = '';
-    if (event.wheelDelta) {
-      //ie/chrome
-      if (event.wheelDelta > 0) {
-        flag = 'up';
-      } else {
-        flag = 'down';
-      }
-    } else if (event.detail) {
-      //firefox
-      if (event.detail < 0) {
-        flag = 'up';
-      } else {
-        flag = 'down';
-      }
-    }
-    
-    switch (flag) {
-      case 'up' :
-        /*if (nowIndex < 0) nowIndex = 0;
-        ulNode.style.top = - nowIndex * contentHeight + 'px';*/
-        if (nowIndex > 0) {
-          nowIndex--;
-          move(nowIndex);
+    //函数反抖
+    //清除上一次的延时定时器
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(() => {
+      let flag = '';
+      if (event.wheelDelta) {
+        //ie/chrome
+        if (event.wheelDelta > 0) {
+          flag = 'up';
+        } else {
+          flag = 'down';
         }
-        break;
-      case 'down' :
-        if (nowIndex < 4) {
-          nowIndex++;
-          move(nowIndex);
+      } else if (event.detail) {
+        //firefox
+        if (event.detail < 0) {
+          flag = 'up';
+        } else {
+          flag = 'down';
+        }
+      }
+  
+      switch (flag) {
+        case 'up' :
+          /*if (nowIndex < 0) nowIndex = 0;
+          ulNode.style.top = - nowIndex * contentHeight + 'px';*/
+          if (nowIndex > 0) {
+            nowIndex--;
+            move(nowIndex);
           }
-        break;
-    }
+          break;
+        case 'down' :
+          if (nowIndex < 4) {
+            nowIndex++;
+            move(nowIndex);
+          }
+          break;
+      }
+    }, 200);
     
     //禁止默认行为
     event.preventDefault && event.preventDefault();
@@ -93,4 +99,14 @@ export default function () {
 
   //初始化让小箭头来到第一个li下面
   arrowNode.style.left = navLiNodes[0].getBoundingClientRect().left + navLiNodes[0].offsetWidth / 2 - arrowHalfWidth + 'px';
+
+  //绑定窗口的缩放事件，修改小箭头和ul的位置
+  window.onresize = function () {
+    // 修改小箭头的位置
+    arrowNode.style.left = navLiNodes[nowIndex].getBoundingClientRect().left + navLiNodes[nowIndex].offsetWidth / 2 - arrowHalfWidth + 'px';
+    //修改ul的位置
+    contentHeight = contentNode.offsetHeight;
+    ulNode.style.top = - nowIndex * contentHeight + 'px';
+  }
+
 }

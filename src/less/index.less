@@ -1,0 +1,57 @@
+@import 'reset';
+
+
+#wrap{
+  height: 100%;
+  #header{
+    background: pink;
+    .header-main{
+      width: 1100px;
+      height: 80px;
+      margin: 0 auto;
+      background: deeppink;
+      .logo{
+        float: left;
+        margin-top: 15px;
+      }
+      .nav{
+        float: right;
+        margin-top: 50px;
+        li{
+          position: relative;
+          float: left;
+          margin-left: 40px;
+          color: #009EE0;
+          &:hover{
+            .down{
+              width: 100%;
+            }
+          }
+          &.active{
+            .down{
+              width: 100%;
+            }
+          }
+          .down{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            overflow: hidden;
+            transition: width 1s;
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+}
+/*
+  隐藏元素方式：
+    1. display: none
+    2. overflow: hidden  width  height
+    3. opacity: 0
+    4. visibility: hidden
+    5. transform: scale(0)
+    6. position left -10000px
+ */

@@ -1,5 +1,13 @@
 @import 'reset';
 
+.common-title{
+  color:#009ee0;
+  font-size:80px;
+  line-height:0.8;
+  font-weight:bold;
+  letter-spacing:-5px;
+}
+
 #wrap{
   position: relative;
   height: 100%;
@@ -98,7 +106,76 @@
           transform: translate(-50%, -50%);
           width: 1100px;
           height: 520px;
-          background: deeppink;
+          &.home{
+            position: relative;
+            .home-carousel{
+              position: relative;
+              width: 100%;
+              height: 100%;
+              transform-style: preserve-3d;
+              perspective: 1000px;
+              li{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                line-height: 520px;
+                color: #fff;
+                visibility: hidden;
+                &.show{
+                  visibility: visible;
+                }
+                &.leftHide{
+                  visibility: hidden;
+                  animation: leftHide 2s linear;
+                }
+                &.rightShow{
+                  visibility: visible;
+                  animation: rightShow 2s linear;
+                }
+                &.leftShow{
+                  visibility: visible;
+                  animation: leftShow 2s linear;
+                }
+                &.rightHide{
+                  visibility: hidden;
+                  animation: rightHide 2s linear;
+                }
+                &:nth-child(1){
+                  background:#dc6c5f;
+                }
+                &:nth-child(2){
+                  background:#95dc84;
+                }
+                &:nth-child(3){
+                  background:#64b9d2;
+                }
+                &:nth-child(4){
+                  background:#000000;
+                }
+              }
+            }
+            .home-points{
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              li{
+                float: left;
+                width: 20px;
+                height: 20px;
+                background-color: rgba(255,255,255,0.5);
+                margin: 2px;
+                box-shadow: 0 0 4px rgba(25,25,25,0.8);
+                border-radius: 50%;
+                &.active{
+                  background-color: rgba(255,255,255,1);
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -113,3 +190,35 @@
     5. transform: scale(0)
     6. position left -10000px
  */
+
+//第一屏的动画
+/*
+  点击右边小圆点：
+    左边：向左位移，旋转-30deg，从前面到后面，从显示到隐藏
+    右边：向右位移，旋转30deg，从后面到前面，从隐藏到显示
+ */
+
+@keyframes leftHide {
+   0%{visibility: visible;transform: translateZ(0)}
+   50%{transform: translateX(-40%) rotateY(30deg) scale(.8)}
+   100%{visibility: hidden;transform: translateZ(-200px);}
+ }
+
+@keyframes rightShow {
+  0%{visibility: hidden;transform: translateZ(-200px);}
+  50%{transform: translateX(40%) rotateY(-30deg) scale(.8)}
+  100%{visibility: visible;transform: translateZ(0)}
+}
+
+@keyframes leftShow {
+  0%{visibility: hidden;transform: translateZ(-200px);}
+  50%{transform: translateX(-40%) rotateY(30deg) scale(.8)}
+  100%{visibility: visible;transform: translateZ(0)}
+
+}
+
+@keyframes rightHide {
+  0%{visibility: visible;transform: translateZ(0)}
+  50%{transform: translateX(40%) rotateY(-30deg) scale(.8)}
+  100%{visibility: hidden;transform: translateZ(-200px);}
+}

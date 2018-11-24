@@ -3,6 +3,7 @@ export default function () {
   //获取小圆点
   const pointsNodes = document.querySelectorAll('.home-points li');
   const liNodes = document.querySelectorAll('.home-carousel li');
+  const homeNode = document.querySelector('.home');
   
   //记录上一次下标
   let lastIndex = 0;
@@ -10,6 +11,8 @@ export default function () {
   let nowIndex = 0;
   //记录上一次触发的时间
   let lastTime = 0;
+  
+  let timer = null;
 
   //绑定点击事件
   for (let i = 0; i < pointsNodes.length; i++) {
@@ -44,5 +47,39 @@ export default function () {
       
     }
   }
+  
+  //自动轮播
+  function autoPlay() {
+    timer = setInterval(() => {
+      nowIndex++;
+    
+      if (nowIndex === 4) nowIndex = 0;
+    
+      liNodes[nowIndex].className = 'common-title rightShow';
+      liNodes[lastIndex].className = 'common-title leftHide';
+      //让上一次的小圆点清空，当前的加上active
+      pointsNodes[lastIndex].className = '';
+      pointsNodes[nowIndex].className = 'active';
+    
+      //同步更新上一次下标
+      lastIndex = nowIndex;
+    
+    }, 3000)
+  }
+  
+  //开启自动轮播
+  autoPlay();
+  
+  //绑定鼠标移入移出事件
+  /*
+    mouseenter mouseleave
+    mouseover mouseout
+   */
+  homeNode.onmouseenter = function () {
+    //清除轮播
+    clearInterval(timer);
+  }
+  homeNode.onmouseleave = autoPlay;
+  
 
 }

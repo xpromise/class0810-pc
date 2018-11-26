@@ -110,6 +110,7 @@
         width: 100%;
         height: 20%;
         background-repeat: no-repeat;
+        overflow: hidden;
         &:nth-child(1){
           background-image: url('../images/bg1.jpg');
         }
@@ -152,6 +153,7 @@
               height: 100%;
               transform-style: preserve-3d;
               perspective: 1000px;
+              transition: transform 1s, opacity 1s;
               li{
                 position: absolute;
                 left: 0;
@@ -288,6 +290,36 @@
                 right: 45px;
               }
             }
+            .course-plane1{
+              width:359px;
+              height:283px;
+              background:url(../images/plane1.png) no-repeat;
+              position:absolute;
+              left:300px;
+              top:-100px;
+              z-index: -1;
+              transition:1s;
+            }
+            .course-plane2{
+              width:309px;
+              height:249px;
+              background:url(../images/plane2.png) no-repeat;
+              position:absolute;
+              left:-100px;
+              top:200px;
+              z-index: -1;
+              transition:1s;
+            }
+            .course-plane3{
+              width:230px;
+              height:182px;
+              background:url(../images/plane3.png) no-repeat;
+              position:absolute;
+              left:300px;
+              top:400px;
+              z-index: -1;
+              transition:1s;
+            }
           }
           &.works{
             .works-title{
@@ -357,6 +389,36 @@
               background-repeat: no-repeat;
               animation: robot 5s linear infinite;
             }
+            .works-pencil1{
+              width:180px;
+              height:97px;
+              background:url(../images/pencel1.png) no-repeat;
+              position:absolute;
+              transition:transform 1s;
+              left:500px;
+              top:0;
+              z-index: -1;
+            }
+            .works-pencil2{
+              width:268px;
+              height:38px;
+              background:url(../images/pencel2.png) no-repeat;
+              position:absolute;
+              transition:transform 1s;
+              left:300px;
+              top:250px;
+              z-index: -1;
+            }
+            .works-pencil3{
+              width:441px;
+              height:231px;
+              background:url(../images/pencel3.png) no-repeat;
+              position:absolute;
+              transition:transform 1s;
+              left:650px;
+              top:300px;
+              z-index: -1;
+            }
           }
           &.about{
             .about-title{
@@ -372,6 +434,7 @@
               height: 200px;
               border: 5px rgba(255,255,255,0.5) solid;
               border-radius: 8px;
+              transition: transform 1s;
               &:nth-of-type(1){
                 left: 750px;
                 top:50px;
@@ -448,11 +511,13 @@
               float: left;
               margin: 50px;
               width: 400px;
+              transition: transform 1s;
             }
             .team-text{
               float: right;
               width: 400px;
               margin: 50px;
+              transition: transform 1s;
             }
             .team-person{
               position: absolute;

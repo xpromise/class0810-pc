@@ -10,7 +10,21 @@ export default function () {
   const contentNavLiNodes = document.querySelectorAll('.content-nav li');
   const musicNode = document.querySelector('.music');
   const audioNode = document.querySelector('.music audio');
-
+  
+  const homeCarouselNode = document.querySelector('.home-carousel');
+  const plane1Node = document.querySelector('.course-plane1');
+  const plane2Node = document.querySelector('.course-plane2');
+  const plane3Node = document.querySelector('.course-plane3');
+  const pencil1Node = document.querySelector('.works-pencil1');
+  const pencil2Node = document.querySelector('.works-pencil2');
+  const pencil3Node = document.querySelector('.works-pencil3');
+  const aboutListsNodes = document.querySelectorAll('.about-lists');
+  
+  const teamTitleNode = document.querySelector('.team-title');
+  const teamTextNode = document.querySelector('.team-text');
+  
+  
+  
   //所有样式选择器都是从右往左的解析的
   //选择器最多3-4个
   //选择器的开销（id < class < xxxx）
@@ -23,6 +37,76 @@ export default function () {
   
   //代表li的下标
   let nowIndex = 0;
+  let lastIndex = 0;
+  
+  //出入场动画
+  const animation = [
+    {
+      anIn () {
+        homeCarouselNode.style.transform = 'translateY(0)';
+        homeCarouselNode.style.opacity = 1;
+      },
+      anOut () {
+        homeCarouselNode.style.transform = 'translateY(-50%)';
+        homeCarouselNode.style.opacity = 0.2;
+      }
+    },
+    {
+      anIn () {
+        //右上 右下 左下
+        plane1Node.style.transform = 'translate(0, 0)';
+        plane2Node.style.transform = 'translate(0, 0)';
+        plane3Node.style.transform = 'translate(0, 0)';
+      },
+      anOut () {
+        plane2Node.style.transform = 'translate(-100px, 100px)';
+        plane1Node.style.transform = 'translate(-100px, -100px)';
+        plane3Node.style.transform = 'translate(100px, -100px)';
+      }
+    },
+    {
+      anIn () {
+        pencil1Node.style.transform = 'translateY(0)';
+        pencil2Node.style.transform = 'translateY(0)';
+        pencil3Node.style.transform = 'translateY(0)';
+      },
+      anOut () {
+        //上 下 下
+        pencil1Node.style.transform = 'translateY(-100px)';
+        pencil2Node.style.transform = 'translateY(100px)';
+        pencil3Node.style.transform = 'translateY(100px)';
+      }
+    },
+    {
+      anIn () {
+        aboutListsNodes[0].style.transform = 'rotate(0)';
+        aboutListsNodes[1].style.transform = 'rotate(0)';
+      },
+      anOut () {
+        aboutListsNodes[0].style.transform = 'rotate(45deg)';
+        aboutListsNodes[1].style.transform = 'rotate(-45deg)';
+      }
+    },
+    {
+      anIn () {
+        teamTitleNode.style.transform = 'translateX(0)';
+        teamTextNode.style.transform = 'translateX(0)';
+      },
+      anOut () {
+        teamTitleNode.style.transform = 'translateX(-100px)';
+        teamTextNode.style.transform = 'translateX(100px)';
+      }
+    },
+  ]
+  
+  //一上来所有屏都要做出场动画
+  for (var i = 0; i < animation.length; i++) {
+    animation[i].anOut();
+  }
+  //默认第一屏做入场动画
+  setTimeout(function () {
+    animation[0].anIn();
+  }, 2000)
   
   //ie/chrome
   document.onmousewheel = wheel;
@@ -80,10 +164,12 @@ export default function () {
   
   function move(nowIndex) {
     //将所有的class清空
-    for (var j = 0; j < navLiNodes.length; j++) {
+    /*for (var j = 0; j < navLiNodes.length; j++) {
       navLiNodes[j].className = '';
       contentNavLiNodes[j].className = '';
-    }
+    }*/
+    navLiNodes[lastIndex].className = '';
+    contentNavLiNodes[lastIndex].className = '';
     //将当前点击的元素添加active class
     navLiNodes[nowIndex].className = 'active';
     contentNavLiNodes[nowIndex].className = 'active';
@@ -91,6 +177,12 @@ export default function () {
     arrowNode.style.left = navLiNodes[nowIndex].getBoundingClientRect().left + navLiNodes[nowIndex].offsetWidth / 2 - arrowHalfWidth + 'px';
     //内容区ul的top
     ulNode.style.top = - nowIndex * contentHeight + 'px';
+    //让上一屏做出场动画
+    animation[lastIndex].anOut();
+    //让当前屏做入场动画
+    animation[nowIndex].anIn();
+    //同步下标
+    lastIndex = nowIndex;
   }
 
   //遍历绑定事件监听

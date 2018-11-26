@@ -61,18 +61,6 @@ module.exports = {
           }
         ]
       },
-      /*{
-        test: /\.(mp3)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              publicPath: '../images',  //修改样式中url图片路径
-              outputPath: 'images',  //图片最终输入的路径
-            }
-          }
-        ]
-      },*/
       {
         test: /\.js$/, // 涵盖 .js 文件
         enforce: "pre", // 预先加载好 jshint loader

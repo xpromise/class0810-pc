@@ -1,6 +1,8 @@
 /*
 头部、内容区模块
  */
+import firstView from './firstView';
+
 export default function () {
   //实现头部点击切换class
   const navLiNodes = document.querySelectorAll('.nav li');
@@ -38,6 +40,47 @@ export default function () {
   //代表li的下标
   let nowIndex = 0;
   let lastIndex = 0;
+  
+  bootAnimation();
+  //开机动画
+  function bootAnimation() {
+    const bootAnimationNode = document.querySelector('#boot-animation');
+    const lineNode = document.querySelector('#boot-animation .line');
+    const upNode = document.querySelector('#boot-animation .up');
+    const downNode = document.querySelector('#boot-animation .down');
+    //获取所有图片
+    const imgsArr = ['bg1.jpg','bg2.jpg','bg3.jpg','bg4.jpg','bg5.jpg','about1.jpg','about2.jpg','about3.jpg','about4.jpg','worksimg1.jpg','worksimg2.jpg','worksimg3.jpg','worksimg4.jpg','team.png','greenLine.png'];
+    const length = imgsArr.length;
+    let loadedImgNum = 0;
+    
+    imgsArr.forEach((item, index) => {
+      //创建图片标签
+      const img = new Image();
+      //绑定事件监听，防止图片已经加载完成了~
+      img.onload = function () {
+        loadedImgNum++;
+        //修改line宽度
+        lineNode.style.width = loadedImgNum / length * 100 + '%';
+        //一旦loadedImgNum===imgsArr.length，说明所有图片加载完成了
+        if (loadedImgNum === length) {
+          upNode.style.height = '0';
+          downNode.style.height = '0';
+          lineNode.style.display = 'none';
+          //移除遮罩层
+          upNode.addEventListener('transitionend', function () {
+            bootAnimationNode.remove();
+            //入场动画
+            animation[0].anIn();
+            //开启自动轮播
+            firstView();
+          })
+        }
+      }
+      //设置图片的src属性，自动发送请求
+      img.src = `./images/${item}`;
+    })
+  
+  }
   
   //出入场动画
   const animation = [
@@ -104,9 +147,9 @@ export default function () {
     animation[i].anOut();
   }
   //默认第一屏做入场动画
-  setTimeout(function () {
+  /*setTimeout(function () {
     animation[0].anIn();
-  }, 2000)
+  }, 2000)*/
   
   //ie/chrome
   document.onmousewheel = wheel;

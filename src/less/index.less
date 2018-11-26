@@ -567,6 +567,42 @@
       }
     }
   }
+  #boot-animation{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    .up{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 50%;
+      background: #009ee0;
+      transition: height 1s;
+    }
+    .down{
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 50%;
+      background: #009ee0;
+      transition: height 1s;
+    }
+    .line{
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 4px;
+      background: white;
+      transition: width 1s;
+    }
+  }
 }
 /*
   隐藏元素方式：

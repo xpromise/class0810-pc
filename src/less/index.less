@@ -434,6 +434,45 @@
               background-repeat: no-repeat;
             }
           }
+          &.team{
+            .team-title{
+              float: left;
+              margin: 50px;
+              width: 400px;
+            }
+            .team-text{
+              float: right;
+              width: 400px;
+              margin: 50px;
+            }
+            .team-person{
+              position: absolute;
+              top: 230px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 944px;
+              height: 448px;
+              li{
+                float: left;
+                width: 236px;
+                height: 100%;
+                background-image: url('../images/team.png');
+                background-repeat: no-repeat;
+                &:nth-child(1){
+                  background-position: 3px 0px;
+                }
+                &:nth-child(2){
+                  background-position: -230px 0px;
+                }
+                &:nth-child(3){
+                  background-position: -483px 0px;
+                }
+                &:nth-child(4){
+                  background-position: -710px 0px;
+                }
+              }
+            }
+          }
         }
       }
     }

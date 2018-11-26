@@ -99,7 +99,7 @@ export default function () {
 
   //初始化让小箭头来到第一个li下面
   arrowNode.style.left = navLiNodes[0].getBoundingClientRect().left + navLiNodes[0].offsetWidth / 2 - arrowHalfWidth + 'px';
-  move(3);
+  move(4);
 
   //绑定窗口的缩放事件，修改小箭头和ul的位置
   window.onresize = function () {

@@ -37,6 +37,15 @@
         float: left;
         margin-top: 15px;
       }
+      .music{
+        float: left;
+        width:14px;
+        height:14px;
+        margin:50px 0 0 5px;
+        cursor: pointer;
+        background-image: url('data:image/gif;base64,R0lGODlhDgAOAJEAAAAAAP///wB8Z////yH5BAEAAAMALAAAAAAOAA4AAAIenI+pqyKMHDySybrusw8PrH2dM4omWYbomZIsq7YFADs=');
+        background-repeat: no-repeat;
+      }
       //导航区域
       .nav{
         float: right;
@@ -88,7 +97,7 @@
     left: 0;
     right: 0;
     overflow: hidden;
-    >ul{
+    .content-main{
       position: absolute;
       //解决第一次没有过渡效果问题
       top: 0;
@@ -473,6 +482,22 @@
               }
             }
           }
+        }
+      }
+    }
+    .content-nav{
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      li{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 1px solid white;
+        margin-top: 10px;
+        &.active{
+          background: white;
         }
       }
     }
